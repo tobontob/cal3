@@ -19,30 +19,30 @@ export default function CalorieCalculator() {
   } | null>(null);
 
   const activityMultipliers = {
-    sedentary: 1.2, // °ÅÀÇ ¿îµ¿ÇÏÁö ¾ÊÀ½
-    light: 1.375, // °¡º­¿î ¿îµ¿ (ÁÖ 1-3È¸)
-    moderate: 1.55, // º¸Åë ¼öÁØ (ÁÖ 3-5È¸)
-    active: 1.725, // È°µ¿Àû (ÁÖ 6-7È¸)
-    very_active: 1.9, // ¸Å¿ì È°µ¿Àû (ÇÏ·ç 2È¸ ÀÌ»ó)
+    sedentary: 1.2, // ê±°ì˜ ìš´ë™í•˜ì§€ ì•ŠìŒ
+    light: 1.375, // ê°€ë²¼ìš´ ìš´ë™ (ì£¼ 1-3íšŒ)
+    moderate: 1.55, // ë³´í†µ ìˆ˜ì¤€ (ì£¼ 3-5íšŒ)
+    active: 1.725, // í™œë™ì  (ì£¼ 6-7íšŒ)
+    very_active: 1.9, // ë§¤ìš° í™œë™ì  (í•˜ë£¨ 2íšŒ ì´ìƒ)
   };
 
   const activityLabels = {
-    sedentary: '°ÅÀÇ ¿îµ¿ÇÏÁö ¾ÊÀ½',
-    light: '°¡º­¿î ¿îµ¿ (ÁÖ 1-3È¸)',
-    moderate: 'º¸Åë ¼öÁØ (ÁÖ 3-5È¸)',
-    active: 'È°µ¿Àû (ÁÖ 6-7È¸)',
-    very_active: '¸Å¿ì È°µ¿Àû (ÇÏ·ç 2È¸ ÀÌ»ó)',
+    sedentary: 'ê±°ì˜ ìš´ë™í•˜ì§€ ì•ŠìŒ',
+    light: 'ê°€ë²¼ìš´ ìš´ë™ (ì£¼ 1-3íšŒ)',
+    moderate: 'ë³´í†µ ìˆ˜ì¤€ (ì£¼ 3-5íšŒ)',
+    active: 'í™œë™ì  (ì£¼ 6-7íšŒ)',
+    very_active: 'ë§¤ìš° í™œë™ì  (í•˜ë£¨ 2íšŒ ì´ìƒ)',
   };
 
   const calculateCalories = () => {
     if (!age || !weight || !height) return;
 
-    // Harris-Benedict °ø½Ä »ç¿ë
+    // Harris-Benedict ê³µì‹ ì‚¬ìš©
     const weightKg = parseFloat(weight);
     const heightCm = parseFloat(height);
     const ageYears = parseFloat(age);
 
-    // BMR (±âÃÊ´ë»ç·®) °è»ê
+    // BMR (ê¸°ì´ˆëŒ€ì‚¬ëŸ‰) ê³„ì‚°
     let bmr;
     if (gender === 'male') {
       bmr = 88.362 + (13.397 * weightKg) + (4.799 * heightCm) - (5.677 * ageYears);
@@ -50,25 +50,25 @@ export default function CalorieCalculator() {
       bmr = 447.593 + (9.247 * weightKg) + (3.098 * heightCm) - (4.330 * ageYears);
     }
 
-    // È°µ¿·®¿¡ µû¸¥ ÀÏÀÏ ÇÊ¿ä Ä®·Î¸®
+    // í™œë™ëŸ‰ì— ë”°ë¥¸ ì¼ì¼ í•„ìš” ì¹¼ë¡œë¦¬
     const maintenance = bmr * activityMultipliers[activityLevel];
 
     setResult({
       bmr: Math.round(bmr),
       maintenance: Math.round(maintenance),
-      weightLoss: Math.round(maintenance - 500), // ÁÖ´ç 0.5kg °¨·®
-      weightGain: Math.round(maintenance + 500), // ÁÖ´ç 0.5kg Áõ·®
+      weightLoss: Math.round(maintenance - 500), // ì£¼ë‹¹ 0.5kg ê°ëŸ‰
+      weightGain: Math.round(maintenance + 500), // ì£¼ë‹¹ 0.5kg ì¦ëŸ‰
     });
   };
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-md">
-      <h1 className="text-3xl font-bold text-center mb-8">Ä®·Î¸® °è»ê±â</h1>
+      <h1 className="text-3xl font-bold text-center mb-8">ì¹¼ë¡œë¦¬ ê³„ì‚°ê¸°</h1>
       
       <div className="bg-white rounded-lg shadow-md p-6">
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            ¼ºº°
+            ì„±ë³„
           </label>
           <div className="flex gap-4">
             <label className="flex items-center">
@@ -78,7 +78,7 @@ export default function CalorieCalculator() {
                 onChange={() => setGender('male')}
                 className="mr-2"
               />
-              ³²¼º
+              ë‚¨ì„±
             </label>
             <label className="flex items-center">
               <input
@@ -87,53 +87,53 @@ export default function CalorieCalculator() {
                 onChange={() => setGender('female')}
                 className="mr-2"
               />
-              ¿©¼º
+              ì—¬ì„±
             </label>
           </div>
         </div>
 
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            ³ªÀÌ
+            ë‚˜ì´
           </label>
           <input
             type="number"
             value={age}
             onChange={(e) => setAge(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="³ªÀÌ¸¦ ÀÔ·ÂÇÏ¼¼¿ä"
+            placeholder="ë‚˜ì´ë¥¼ ì…ë ¥í•˜ì„¸ìš”"
           />
         </div>
 
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            Ã¼Áß (kg)
+            ì²´ì¤‘ (kg)
           </label>
           <input
             type="number"
             value={weight}
             onChange={(e) => setWeight(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="Ã¼ÁßÀ» ÀÔ·ÂÇÏ¼¼¿ä"
+            placeholder="ì²´ì¤‘ì„ ì…ë ¥í•˜ì„¸ìš”"
           />
         </div>
 
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            ½ÅÀå (cm)
+            ì‹ ì¥ (cm)
           </label>
           <input
             type="number"
             value={height}
             onChange={(e) => setHeight(e.target.value)}
             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            placeholder="½ÅÀåÀ» ÀÔ·ÂÇÏ¼¼¿ä"
+            placeholder="ì‹ ì¥ì„ ì…ë ¥í•˜ì„¸ìš”"
           />
         </div>
 
         <div className="mb-6">
           <label className="block text-gray-700 text-sm font-bold mb-2">
-            È°µ¿·®
+            í™œë™ëŸ‰
           </label>
           <select
             value={activityLevel}
@@ -152,24 +152,24 @@ export default function CalorieCalculator() {
           onClick={calculateCalories}
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded w-full"
         >
-          °è»êÇÏ±â
+          ê³„ì‚°í•˜ê¸°
         </button>
 
         {result && (
           <div className="mt-6 p-4 bg-gray-50 rounded-lg space-y-2">
             <p className="text-lg">
-              ±âÃÊ´ë»ç·®: <span className="font-semibold">{result.bmr} kcal</span>
+              ê¸°ì´ˆëŒ€ì‚¬ëŸ‰: <span className="font-semibold">{result.bmr} kcal</span>
             </p>
             <p className="text-lg">
-              À¯Áö Ä®·Î¸®: <span className="font-semibold">{result.maintenance} kcal</span>
+              ìœ ì§€ ì¹¼ë¡œë¦¬: <span className="font-semibold">{result.maintenance} kcal</span>
             </p>
             <p className="text-lg">
-              °¨·® Ä®·Î¸®: <span className="font-semibold">{result.weightLoss} kcal</span>
-              <span className="text-sm text-gray-500 ml-2">(ÁÖ´ç 0.5kg °¨·®)</span>
+              ê°ëŸ‰ ì¹¼ë¡œë¦¬: <span className="font-semibold">{result.weightLoss} kcal</span>
+              <span className="text-sm text-gray-500 ml-2">(ì£¼ë‹¹ 0.5kg ê°ëŸ‰)</span>
             </p>
             <p className="text-lg">
-              Áõ·® Ä®·Î¸®: <span className="font-semibold">{result.weightGain} kcal</span>
-              <span className="text-sm text-gray-500 ml-2">(ÁÖ´ç 0.5kg Áõ·®)</span>
+              ì¦ëŸ‰ ì¹¼ë¡œë¦¬: <span className="font-semibold">{result.weightGain} kcal</span>
+              <span className="text-sm text-gray-500 ml-2">(ì£¼ë‹¹ 0.5kg ì¦ëŸ‰)</span>
             </p>
           </div>
         )}
